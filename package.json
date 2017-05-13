@@ -1,7 +1,14 @@
 {
   "name": "guitar-js",
+  "main": "src/guitar.js",
   "version": "1.0.0",
-  "description": "Guitar JS",
+  "description": "Draws an SVG image of chords",
+  "keywords": [
+    "guitar-js",
+    "guitar",
+    "chord",
+    "chords"
+  ],
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-live-server": "0.0.30",
@@ -12,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/StreetHoboSP/guitar-js.git"
   },
-  "author": "",
+  "author": "Fomin Sergey",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/StreetHoboSP/guitar-js/issues"
