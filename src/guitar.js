@@ -29,6 +29,8 @@ var Guitar = (function () {
             }
         }];
 
+        this.title = null;
+
         this.fretNum = 3;
 
         this.chordFirstFret = null;
@@ -44,6 +46,10 @@ var Guitar = (function () {
     ChordData.prototype._setData = function (options) {
         if (typeof options !== 'object') {
             throw new Error('Wrong options type');
+        }
+
+        if ('title' in options) {
+            this.title = String(options.title);
         }
 
         if ('statusString' in options) {
@@ -156,6 +162,7 @@ var Guitar = (function () {
 
     ChordData.prototype.getData = function () {
         return {
+            'title': this.title,
             'statusString': this.statusString,
             'chord': this.chord,
             'firstFret': this.chordFirstFret,
@@ -168,6 +175,9 @@ var Guitar = (function () {
         // Element
         this.elementId = id;
         this.element = document.getElementById(this.elementId);
+
+        //Margin
+        this.margin = 5;
 
         // Svg
         this.svg = null;
@@ -223,7 +233,7 @@ var Guitar = (function () {
             'fill': this.colors.white
         }));
 
-        for (var i = this.stringHorizontalMargin + this.riffStartX; i <= this.riffWidth; i += this.stringHorizontalMargin) {
+        for (var i = this.stringHorizontalMargin + this.riffStartX, length = this.riffStartX + this.riffWidth; i <= length; i += this.stringHorizontalMargin) {
             this.svg.appendChild(Svg.getNode('line', {
                 'x1': i,
                 'y1': this.riffStartY,
@@ -234,7 +244,7 @@ var Guitar = (function () {
             }));
         }
 
-        for (var i = this.stringVerticalMargin + this.riffStartY; i <= this.riffHeight; i += this.stringVerticalMargin) {
+        for (var i = this.stringVerticalMargin + this.riffStartY, length = this.riffStartY + this.riffHeight; i <= length; i += this.stringVerticalMargin) {
             this.svg.appendChild(Svg.getNode('line', {
                 'x1': this.riffStartX,
                 'y1': i,
@@ -329,9 +339,28 @@ var Guitar = (function () {
         this.svg.appendChild(textElement);
     };
 
+    ChordDrawer.prototype._drawTitle = function () {
+        var textElement = Svg.getNode('text', {
+            'x': this.riffStartX + this.riffWidth / 2,
+            'y': this.riffStartY - this.radiusStatusString - this.margin,
+            'font-family': this.fontFamily,
+            'fill': this.colors.black,
+            'text-anchor': 'middle'
+        });
+
+        textElement.textContent = this.data.title;
+
+        this.svg.appendChild(textElement);
+    };
+
     ChordDrawer.prototype.drawChord = function () {
         if (this.data.firstFret > 1) {
             this.svgHeigth = this.svgHeigth + this.fontSize;
+        }
+
+        if (this.data.title != null) {
+            this.svgHeigth = this.svgHeigth + this.fontSize + this.margin;
+            this.riffStartY = this.riffStartY + this.fontSize + this.margin;
         }
 
         this._drawSvg();
@@ -351,6 +380,10 @@ var Guitar = (function () {
 
         if (this.data.firstFret > 1) {
             this._drawFretNumber(this.data.firstFret);
+        }
+
+        if (this.data.title != null) {
+            this._drawTitle();
         }
 
         this.element.appendChild(this.svg);
