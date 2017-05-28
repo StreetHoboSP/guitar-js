@@ -21,6 +21,14 @@ To add a chord
 
 Options is an object containing all the chord data.
 
+### Title
+
+```javascript
+    {
+        'title': 'Bm'
+    }    
+```
+
 ### String status
 
 String can be 'open' or 'closed'. When argument is null, status not 

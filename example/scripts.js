@@ -1,4 +1,5 @@
 Guitar.chord('test', {
+    'title': 'Bm',
     'statusString': ['open', 'open', 'open', 'open', 'open', 'closed'],
     'chord': [{
         'fret': 1,
