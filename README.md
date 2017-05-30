@@ -11,8 +11,18 @@ chord
 
 To add a chord
 
+### Chord
+
 ```javascript
     Guitar.chord('container', {
+        // Options - see chapter Chord options
+    });
+```
+
+### Chord in tooltip
+
+```javascript
+    Guitar.tooltipChord('container', {
         // Options - see chapter Chord options
     });
 ```
