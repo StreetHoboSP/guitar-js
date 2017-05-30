@@ -1,4 +1,4 @@
-Guitar.chord('test', {
+var chordBmOptions = {
     'title': 'Bm',
     'statusString': ['open', 'open', 'open', 'open', 'open', 'closed'],
     'chord': [{
@@ -17,4 +17,8 @@ Guitar.chord('test', {
         'fret': 3,
         'string': 4
     }]
-});
+};
+
+Guitar.chord('test', chordBmOptions);
+Guitar.tooltipChord('test-tooltip', chordBmOptions);
+
