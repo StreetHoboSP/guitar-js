@@ -393,6 +393,35 @@ var Guitar = (function () {
         chord: function (element, options) {
             var chord = new ChordDrawer(element, options);
             chord.drawChord(element);
+        },
+        tooltipChord: function (element, options) {
+            var id = element + '_chord';
+
+            var element = document.getElementById(element);
+
+            var div = document.createElement('div');
+            div.setAttribute('id', id);
+            element.appendChild(div);
+
+            var chord = new ChordDrawer(id, options);
+            chord.drawChord();
+
+            div.style.width=chord.svgWidth + 'px';
+            div.style.height=chord.svgHeigth + 'px';
+
+            div.style.background='white';
+            div.style.border='1px solid black';
+            div.style.borderRadius='4px';
+            div.style.padding='10px';
+            div.style.display='none';
+
+            element.onmouseover = function(event) {
+                div.style.display='block';
+            };
+
+            element.onmouseout = function(event) {
+                div.style.display='none';
+            };
         }
     };
 
